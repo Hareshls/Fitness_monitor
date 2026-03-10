@@ -13,7 +13,12 @@ const Profile = () => {
             calories: user?.goals?.calories || 3000,
             duration: user?.goals?.duration || 180,
             workouts: user?.goals?.workouts || 5
-        }
+        },
+        age: user?.age || '',
+        weight: user?.weight || '',
+        height: user?.height || '',
+        fitness_goal: user?.fitness_goal || 'general',
+        activity_level: user?.activity_level || 'moderate'
     });
 
     const handleSave = async () => {
@@ -102,6 +107,82 @@ const Profile = () => {
                                     />
                                 ) : (
                                     <p>{user?.goals?.workouts || 5}</p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="fitness-stats-section">
+                        <h3>Fitness Data</h3>
+                        <div className="fitness-stats-grid">
+                            <div className="stat-input-group">
+                                <label>Age</label>
+                                {isEditing ? (
+                                    <input
+                                        type="number"
+                                        value={formData.age}
+                                        onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                                    />
+                                ) : (
+                                    <p>{user?.age || 'N/A'}</p>
+                                )}
+                            </div>
+                            <div className="stat-input-group">
+                                <label>Weight (kg)</label>
+                                {isEditing ? (
+                                    <input
+                                        type="number"
+                                        value={formData.weight}
+                                        onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
+                                    />
+                                ) : (
+                                    <p>{user?.weight || 'N/A'}</p>
+                                )}
+                            </div>
+                            <div className="stat-input-group">
+                                <label>Height (cm)</label>
+                                {isEditing ? (
+                                    <input
+                                        type="number"
+                                        value={formData.height}
+                                        onChange={(e) => setFormData({ ...formData, height: e.target.value })}
+                                    />
+                                ) : (
+                                    <p>{user?.height || 'N/A'}</p>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="goals-dropdown-grid">
+                            <div className="stat-input-group">
+                                <label>Fitness Goal</label>
+                                {isEditing ? (
+                                    <select
+                                        value={formData.fitness_goal}
+                                        onChange={(e) => setFormData({ ...formData, fitness_goal: e.target.value })}
+                                    >
+                                        <option value="general">General Fitness</option>
+                                        <option value="weight_loss">Weight Loss</option>
+                                        <option value="muscle_gain">Muscle Gain</option>
+                                        <option value="fitness">Specific Fitness</option>
+                                    </select>
+                                ) : (
+                                    <p>{user?.fitness_goal?.replace('_', ' ') || 'General'}</p>
+                                )}
+                            </div>
+                            <div className="stat-input-group">
+                                <label>Activity Level</label>
+                                {isEditing ? (
+                                    <select
+                                        value={formData.activity_level}
+                                        onChange={(e) => setFormData({ ...formData, activity_level: e.target.value })}
+                                    >
+                                        <option value="low">Low</option>
+                                        <option value="moderate">Moderate</option>
+                                        <option value="high">High</option>
+                                    </select>
+                                ) : (
+                                    <p>{user?.activity_level || 'Moderate'}</p>
                                 )}
                             </div>
                         </div>

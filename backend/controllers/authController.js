@@ -30,6 +30,11 @@ const registerUser = async (req, res) => {
             name: user.name,
             email: user.email,
             goals: user.goals,
+            age: user.age,
+            weight: user.weight,
+            height: user.height,
+            fitness_goal: user.fitness_goal,
+            activity_level: user.activity_level,
             token: generateToken(user._id)
         });
     } else {
@@ -52,6 +57,11 @@ const loginUser = async (req, res) => {
             name: user.name,
             email: user.email,
             goals: user.goals,
+            age: user.age,
+            weight: user.weight,
+            height: user.height,
+            fitness_goal: user.fitness_goal,
+            activity_level: user.activity_level,
             token: generateToken(user._id)
         });
     } else {
@@ -77,10 +87,15 @@ const getMe = async (req, res) => {
 // @access  Private
 const updateProfile = async (req, res) => {
     try {
-        const { name, goals } = req.body;
+        const { name, goals, age, weight, height, fitness_goal, activity_level } = req.body;
         const updateFields = {};
 
         if (name) updateFields.name = name;
+        if (age) updateFields.age = age;
+        if (weight) updateFields.weight = weight;
+        if (height) updateFields.height = height;
+        if (fitness_goal) updateFields.fitness_goal = fitness_goal;
+        if (activity_level) updateFields.activity_level = activity_level;
         if (goals) {
             updateFields.goals = {
                 calories: goals.calories,
@@ -104,6 +119,11 @@ const updateProfile = async (req, res) => {
             name: updatedUser.name,
             email: updatedUser.email,
             goals: updatedUser.goals,
+            age: updatedUser.age,
+            weight: updatedUser.weight,
+            height: updatedUser.height,
+            fitness_goal: updatedUser.fitness_goal,
+            activity_level: updatedUser.activity_level,
             token: generateToken(updatedUser._id)
         });
     } catch (error) {

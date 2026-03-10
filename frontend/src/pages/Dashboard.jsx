@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import API from '../api';
 import { AuthContext } from '../context/AuthContext';
 import { Flame, Clock, Dumbbell, TrendingUp } from 'lucide-react';
+import WorkoutRecommendation from '../components/WorkoutRecommendation';
 import './Dashboard.css';
 
 const Dashboard = () => {
@@ -105,6 +106,14 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+
+            <section className="ai-section fade-in">
+                <div className="section-header">
+                    <h2>Your AI Personal Trainer</h2>
+                    <p>Tailored recommendations based on your profile</p>
+                </div>
+                <WorkoutRecommendation />
+            </section>
 
             <div className="dashboard-main-grid">
                 <div className="left-col">

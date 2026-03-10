@@ -74,6 +74,25 @@
     margin-bottom: 4rem;
 }
 
+.ai-section {
+    margin-bottom: 4rem;
+    padding: 2rem;
+    background: rgba(30, 215, 96, 0.05);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ai-section .section-header {
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.ai-section .section-header p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
+
 .goal-status {
     background: var(--glass);
     padding: 0.4rem 0.8rem;

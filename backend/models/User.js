@@ -25,6 +25,19 @@ const userSchema = new mongoose.Schema({
         calories: { type: Number, default: 3000 },
         duration: { type: Number, default: 180 },
         workouts: { type: Number, default: 5 }
+    },
+    age: { type: Number },
+    weight: { type: Number },
+    height: { type: Number },
+    fitness_goal: {
+        type: String,
+        enum: ['weight_loss', 'muscle_gain', 'fitness', 'general'],
+        default: 'general'
+    },
+    activity_level: {
+        type: String,
+        enum: ['low', 'moderate', 'high'],
+        default: 'moderate'
     }
 }, { timestamps: true });
 

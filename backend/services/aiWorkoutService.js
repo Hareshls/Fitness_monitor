@@ -15,26 +15,14 @@ const getRecommendation = async (userData) => {
     }
 
     try {
-        const prompt = `
-            Act as a professional fitness trainer. 
-            Generate a personalized workout plan for a user with these details:
-            - Age: ${age || 'N/A'}
-            - Weight: ${weight || 'N/A'}kg
-            - Height: ${height || 'N/A'}cm
-            - Goal: ${fitness_goal}
-            - Activity Level: ${activity_level}
-
-            Return EXACTLY a JSON array of 4 strings, each being a specific exercise with reps/duration.
-            Example format: ["Running - 20 mins", "Pushups - 3 sets", "Squats - 15 reps", "Plank - 30s"]
-            Do not include any other text, just the JSON array.
-        `;
+        const prompt = `Trainer: Generate 4 workouts for ${age || 'N/A'}yr, ${weight || 'N/A'}kg, ${height || 'N/A'}cm, Goal: ${fitness_goal}, Level: ${activity_level}. Return ONLY a JSON array of strings like ["Exercise - Reps/Time"].`;
 
         const response = await axios.post(
             'https://api.groq.com/openai/v1/chat/completions',
             {
                 model: 'llama-3.3-70b-versatile',
                 messages: [{ role: 'user', content: prompt }],
-                temperature: 0.7,
+                temperature: 0.6,
             },
             {
                 headers: {
@@ -45,31 +33,24 @@ const getRecommendation = async (userData) => {
         );
 
         const content = response.data.choices[0].message.content;
-        // Parse the JSON array from the response
-        try {
-            return JSON.parse(content);
-        } catch (e) {
-            // Sometimes models return text + JSON, try to extract array
-            const match = content.match(/\[.*\]/s);
-            if (match) return JSON.parse(match[0]);
-            throw new Error('Failed to parse AI response');
-        }
+        const match = content.match(/\[.*\]/s);
+        return match ? JSON.parse(match[0]) : JSON.parse(content);
     } catch (error) {
-        console.error('Groq API Error:', error.response?.data || error.message);
+        console.error('AI Error:', error.message);
         return getFallbackRecommendation(fitness_goal, activity_level);
     }
 };
 
-// Original logic moved to fallback
 const getFallbackRecommendation = (goal, level) => {
-    let rec = [];
-    if (goal === 'weight_loss') rec = ['20 min running', '3 sets jumping jacks', '15 squats', '10 min cycling'];
-    else if (goal === 'muscle_gain') rec = ['10 sets pushups', '3 sets pullups', '4 sets bench press', '3 sets squats'];
-    else rec = ['15 min yoga', '20 min jogging', '3 sets plank', '10 min brisk walking'];
+    const plans = {
+        weight_loss: ['20 min running', '3 sets jumping jacks', '15 squats', '10 min cycling'],
+        muscle_gain: ['10 sets pushups', '3 sets pullups', '4 sets bench press', '3 sets squats'],
+        default: ['15 min yoga', '20 min jogging', '3 sets plank', '10 min brisk walking']
+    };
     
-    if (level === 'low') return rec.map(i => `Beginner: ${i}`);
-    if (level === 'high') return rec.map(i => `Intense: ${i}`);
-    return rec;
+    const rec = plans[goal] || plans.default;
+    return level === 'low' ? rec.map(i => `Beginner: ${i}`) : 
+           level === 'high' ? rec.map(i => `Intense: ${i}`) : rec;
 };
 
 module.exports = {

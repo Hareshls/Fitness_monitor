@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary: #00f2fe;
-  --secondary: #4facfe;
-  --accent: #ff007a;
-  --bg-dark: #0f172a;
-  --bg-card: rgba(30, 41, 59, 0.7);
+  --primary: #10b981;
+  --secondary: #34d399;
+  --accent: #2dd4bf;
+  --bg-dark: #020617;
+  --bg-card: rgba(15, 23, 42, 0.8);
   --text-main: #f8fafc;
   --text-dim: #94a3b8;
   --glass: rgba(255, 255, 255, 0.05);
@@ -29,9 +29,9 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(45, 212, 191, 0.1) 0px, transparent 50%),
+    radial-gradient(at 50% 100%, rgba(10, 25, 41, 1) 0px, transparent 50%);
 }
 
 a {
@@ -51,7 +51,7 @@ button {
   transition: var(--transition);
 }
 
-input {
+input, select, textarea {
   background: var(--glass);
   border: 1px solid var(--glass-border);
   color: var(--text-main);
@@ -60,9 +60,15 @@ input {
   font-family: inherit;
   width: 100%;
   transition: var(--transition);
+  outline: none;
 }
 
-input:focus {
+select option {
+  background: var(--bg-dark);
+  color: var(--text-main);
+}
+
+input:focus, select:focus, textarea:focus {
   border-color: var(--primary);
   background: rgba(255, 255, 255, 0.1);
 }
@@ -77,23 +83,44 @@ input:focus {
 }
 
 .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
   background: linear-gradient(135deg, var(--primary), var(--secondary));
   color: #000;
   font-weight: 600;
   padding: 0.8rem 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 242, 254, 0.5);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+}
+
+.btn-primary svg {
+  display: block;
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 0 2rem;
+  padding-bottom: 6rem;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.75rem;
+  }
 }
 
 /* Animations */

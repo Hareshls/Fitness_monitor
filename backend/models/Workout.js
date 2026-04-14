@@ -9,7 +9,11 @@ const workoutSchema = new mongoose.Schema({
     workoutType: {
         type: String,
         required: [true, 'Please add a workout type'],
-        enum: ['Cardio', 'Strength', 'Yoga', 'HIIT', 'Other']
+        enum: ['Cardio', 'Strength', 'Yoga', 'HIIT', 'Running', 'Cycling', 'Swimming', 'Walking', 'Hiking', 'Other']
+    },
+    exercise: {
+        type: String,
+        default: ''
     },
     duration: {
         type: Number,
@@ -18,6 +22,36 @@ const workoutSchema = new mongoose.Schema({
     caloriesBurned: {
         type: Number,
         required: [true, 'Please add calories burned']
+    },
+    intensity: {
+        type: String,
+        enum: ['Low', 'Medium', 'High'],
+        default: 'Medium'
+    },
+    difficulty: {
+        type: String,
+        enum: ['Beginner', 'Intermediate', 'Advanced'],
+        default: 'Beginner'
+    },
+    notes: {
+        type: String,
+        default: ''
+    },
+    sets: {
+        type: Number,
+        default: 0
+    },
+    reps: {
+        type: Number,
+        default: 0
+    },
+    goal: {
+        type: String,
+        default: 'General Fitness'
+    },
+    weight: {
+        type: Number,
+        default: 0
     },
     date: {
         type: Date,

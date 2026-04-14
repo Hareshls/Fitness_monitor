@@ -1,11 +1,11 @@
 .dashboard {
-    padding-top: 2rem;
-    padding-bottom: 4rem;
+    padding-top: 5rem;
+    padding-bottom: 8rem;
 }
 
 .dashboard-header h1 {
-    font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .dashboard-header h1 span {
@@ -77,7 +77,7 @@
 .ai-section {
     margin-bottom: 4rem;
     padding: 2rem;
-    background: rgba(30, 215, 96, 0.05);
+    background: rgba(16, 185, 129, 0.05);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -92,14 +92,38 @@
     font-size: 0.9rem;
 }
 
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
 
 .goal-status {
-    background: var(--glass);
-    padding: 0.4rem 0.8rem;
-    border-radius: 20px;
-    font-size: 0.85rem;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
     color: var(--primary);
-    border: 1px solid var(--glass-border);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
 }
 
 .progress-grid {
@@ -220,18 +244,49 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 2rem;
+    align-items: stretch;
+}
+
+.left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.recent-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.recent-section .glass-card {
+    flex: 1;
 }
 
 .activity-chart-section {
-    padding: 1.5rem;
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.activity-chart-section h2 {
-    margin-bottom: 2rem;
-    font-size: 1.25rem;
+.chart-wrapper {
+    height: 100%;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.progress-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+@media (max-width: 1100px) {
+    .progress-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
 }
 
 .chart-container {
@@ -282,7 +337,7 @@
 
 @media (max-width: 768px) {
     .dashboard-header h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 
     .workout-item {
@@ -300,7 +355,41 @@
         font-size: 0.85rem;
     }
 
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .stat-card {
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+    }
+
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+    }
+
+    .stat-info h3 {
+        font-size: 1.25rem;
+    }
+
+    .stat-info p {
+        font-size: 0.75rem;
+    }
+
     .progress-grid {
         grid-template-columns: 1fr;
+    }
+
+    .ai-section {
+        padding: 1.5rem 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .ai-section .section-header h2 {
+        font-size: 1.5rem;
     }
 }

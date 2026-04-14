@@ -62,7 +62,6 @@ const Dashboard = () => {
         <div className="dashboard container fade-in">
             <header className="dashboard-header">
                 <h1>Hello, <span>{user?.name ? user.name.split(' ')[0] : 'User'}</span> 👋</h1>
-                <p>Welcome back! Here's your fitness overview.</p>
             </header>
 
             <div className="stats-grid">
@@ -109,8 +108,7 @@ const Dashboard = () => {
 
             <section className="ai-section fade-in">
                 <div className="section-header">
-                    <h2>Your AI Personal Trainer</h2>
-                    <p>Tailored recommendations based on your profile</p>
+                    <h2>AI Training</h2>
                 </div>
                 <WorkoutRecommendation />
             </section>
@@ -119,8 +117,7 @@ const Dashboard = () => {
                 <div className="left-col">
                     <section className="progress-section">
                         <div className="section-header">
-                            <h2>Weekly Goal Progress</h2>
-                            <span className="goal-status">Keep pushing!</span>
+                            <h2>Goals</h2>
                         </div>
                         <div className="progress-grid">
                             <div className="progress-card glass-card">
@@ -160,7 +157,7 @@ const Dashboard = () => {
 
                     <section className="recent-section">
                         <div className="section-header">
-                            <h2>Recent Activities</h2>
+                            <h2>Recent</h2>
                             <button className="btn-secondary" onClick={() => window.location.href = '/workouts'}>View All</button>
                         </div>
 
@@ -190,8 +187,11 @@ const Dashboard = () => {
                 </div>
 
                 <div className="right-col">
-                    <section className="activity-chart-section glass-card">
-                        <h2>Activity Status</h2>
+                    <section className="activity-chart-section">
+                        <div className="section-header">
+                            <h2>Status</h2>
+                        </div>
+                        <div className="chart-wrapper glass-card">
                         <div className="chart-container">
                             {last7Days.map((day, i) => (
                                 <div key={i} className="chart-bar-wrapper">
@@ -206,6 +206,7 @@ const Dashboard = () => {
                         </div>
                         <div className="chart-legend">
                             <p>Daily Calories Burned (Last 7 Days)</p>
+                        </div>
                         </div>
                     </section>
                 </div>

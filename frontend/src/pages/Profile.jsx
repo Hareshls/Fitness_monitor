@@ -39,17 +39,19 @@ const Profile = () => {
                     <div className="avatar">
                         {user?.name ? user.name.charAt(0).toUpperCase() : 'U'}
                     </div>
-                    {isEditing ? (
-                        <input
-                            type="text"
-                            className="edit-name-input"
-                            value={formData.name}
-                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        />
-                    ) : (
-                        <h2>{user?.name || 'User'}</h2>
-                    )}
-                    <p className="member-since">Fitness Champion</p>
+                    <div className="profile-header-info">
+                        {isEditing ? (
+                            <input
+                                type="text"
+                                className="edit-name-input"
+                                value={formData.name}
+                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                            />
+                        ) : (
+                            <h2>{user?.name || 'User'}</h2>
+                        )}
+                        <p className="member-since">Fitness Champion</p>
+                    </div>
                 </div>
 
                 <div className="profile-info">
@@ -113,7 +115,7 @@ const Profile = () => {
                     </div>
 
                     <div className="fitness-stats-section">
-                        <h3>Fitness Data</h3>
+                        <h3><User size={20} /> Fitness Data</h3>
                         <div className="fitness-stats-grid">
                             <div className="stat-input-group">
                                 <label>Age</label>

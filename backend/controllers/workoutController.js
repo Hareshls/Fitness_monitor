@@ -18,7 +18,20 @@ const getWorkouts = async (req, res) => {
 // @route   POST /api/workouts
 // @access  Private
 const createWorkout = async (req, res) => {
-    const { workoutType, duration, caloriesBurned, date } = req.body;
+    const { 
+        workoutType, 
+        exercise, 
+        duration, 
+        caloriesBurned, 
+        intensity, 
+        difficulty, 
+        notes, 
+        sets, 
+        reps, 
+        goal, 
+        weight, 
+        date 
+    } = req.body;
 
     if (!workoutType || !duration || !caloriesBurned) {
         return res.status(400).json({ message: 'Please add all required fields' });
@@ -26,13 +39,20 @@ const createWorkout = async (req, res) => {
 
     try {
         console.log('Creating workout for user:', req.user._id);
-        console.log('Workout data:', { workoutType, duration, caloriesBurned, date });
 
         const workout = await Workout.create({
             userId: req.user._id,
             workoutType,
+            exercise,
             duration,
             caloriesBurned,
+            intensity,
+            difficulty,
+            notes,
+            sets,
+            reps,
+            goal,
+            weight,
             date: date || Date.now()
         });
         res.status(201).json(workout);

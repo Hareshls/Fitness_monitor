@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import { Activity, LogOut, User as UserIcon, LayoutDashboard, Dumbbell } from 'lucide-react';
 import './Navbar.css';
@@ -7,6 +7,12 @@ import './Navbar.css';
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // Hide navbar on login and register pages
+    if (location.pathname === '/login' || location.pathname === '/register') {
+        return null;
+    }
 
     const handleLogout = () => {
         logout();

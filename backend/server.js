@@ -16,6 +16,11 @@ mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log('MongoDB Connected'))
     .catch((err) => console.log('MongoDB Connection Error:', err));
 
+// Root Route for Health Check
+app.get('/', (req, res) => {
+    res.send('Fitness Tracker API is running...');
+});
+
 // Routes
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/workouts', require('./routes/workoutRoutes'));

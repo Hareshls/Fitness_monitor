@@ -30,7 +30,7 @@ const Register = () => {
         try {
             const res = await API.post('/auth/register', { name, email, password });
             login(res.data);
-            navigate('/');
+            navigate('/profile', { state: { isNewUser: true } });
         } catch (err) {
             setError(err.response?.data?.message || 'Something went wrong');
         }

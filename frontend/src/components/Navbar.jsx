@@ -19,10 +19,13 @@ const Navbar = () => {
         navigate('/login');
     };
 
+    const isProfileIncomplete = user && (!user.age || !user.weight || !user.height || 
+                                        !user.goals?.calories || !user.goals?.duration || !user.goals?.workouts);
+
     return (
         <nav className="navbar glass-card">
             <div className="nav-container">
-                <Link to="/" className="nav-logo">
+                <Link to={isProfileIncomplete ? "/profile" : "/"} className="nav-logo">
                     <Activity size={32} color="var(--primary)" />
                     <span>FitTrack</span>
                 </Link>
@@ -30,18 +33,22 @@ const Navbar = () => {
                 <ul className="nav-links">
                     {user ? (
                         <>
-                            <li>
-                                <Link to="/">
-                                    <LayoutDashboard size={20} className="nav-icon" />
-                                    <span>Dashboard</span>
-                                </Link>
-                            </li>
-                            <li>
-                                <Link to="/workouts">
-                                    <Dumbbell size={20} className="nav-icon" />
-                                    <span>Workouts</span>
-                                </Link>
-                            </li>
+                            {!isProfileIncomplete && (
+                                <>
+                                    <li>
+                                        <Link to="/">
+                                            <LayoutDashboard size={20} className="nav-icon" />
+                                            <span>Dashboard</span>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/workouts">
+                                            <Dumbbell size={20} className="nav-icon" />
+                                            <span>Workouts</span>
+                                        </Link>
+                                    </li>
+                                </>
+                            )}
                             <li>
                                 <Link to="/profile" title="Profile">
                                     <UserIcon size={20} />

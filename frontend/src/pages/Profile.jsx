@@ -1,12 +1,16 @@
 import React, { useContext, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import API from '../api';
-import { User, Mail, Calendar, Target, Save, X, Edit2 } from 'lucide-react';
+import { User, Mail, Calendar, Target, Save, X, Edit2, Info } from 'lucide-react';
 import './Profile.css';
 
 const Profile = () => {
     const { user, updateUser } = useContext(AuthContext);
-    const [isEditing, setIsEditing] = useState(false);
+    const location = useLocation();
+    const isNewUser = location.state?.isNewUser;
+    
+    const [isEditing, setIsEditing] = useState(isNewUser || false);
     const [formData, setFormData] = useState({
         name: user?.name || '',
         goals: {
@@ -22,6 +26,12 @@ const Profile = () => {
     });
 
     const handleSave = async () => {
+        // Validation check
+        const { age, weight, height, goals } = formData;
+        if (!age || !weight || !height || !goals.calories || !goals.duration || !goals.workouts) {
+            return alert('Please fill in all required fields marked with *');
+        }
+
         try {
             const res = await API.put('/auth/profile', formData);
             updateUser(res.data);
@@ -34,6 +44,17 @@ const Profile = () => {
 
     return (
         <div className="profile-page container fade-in">
+            {isNewUser && (
+                <div className="welcome-banner glass-card">
+                    <div className="welcome-icon">
+                        <Info size={24} />
+                    </div>
+                    <div className="welcome-text">
+                        <h4>Welcome to FitTrack! 👋</h4>
+                        <p>Let's get started by filling in your fitness data. This helps us create the perfect workout plan for you.</p>
+                    </div>
+                </div>
+            )}
             <div className="profile-card glass-card">
                 <div className="profile-header">
                     <div className="avatar">
@@ -67,7 +88,7 @@ const Profile = () => {
                         <h3><Target size={20} /> Weekly Targets</h3>
                         <div className="goals-grid">
                             <div className="goal-input-group">
-                                <label>Calories (kcal)</label>
+                                <label>Calories (kcal) *</label>
                                 {isEditing ? (
                                     <input
                                         type="number"
@@ -82,7 +103,7 @@ const Profile = () => {
                                 )}
                             </div>
                             <div className="goal-input-group">
-                                <label>Duration (min)</label>
+                                <label>Duration (min) *</label>
                                 {isEditing ? (
                                     <input
                                         type="number"
@@ -97,7 +118,7 @@ const Profile = () => {
                                 )}
                             </div>
                             <div className="goal-input-group">
-                                <label>Workouts</label>
+                                <label>Workouts *</label>
                                 {isEditing ? (
                                     <input
                                         type="number"
@@ -118,7 +139,7 @@ const Profile = () => {
                         <h3><User size={20} /> Fitness Data</h3>
                         <div className="fitness-stats-grid">
                             <div className="stat-input-group">
-                                <label>Age</label>
+                                <label>Age *</label>
                                 {isEditing ? (
                                     <input
                                         type="number"
@@ -130,7 +151,7 @@ const Profile = () => {
                                 )}
                             </div>
                             <div className="stat-input-group">
-                                <label>Weight (kg)</label>
+                                <label>Weight (kg) *</label>
                                 {isEditing ? (
                                     <input
                                         type="number"
@@ -142,7 +163,7 @@ const Profile = () => {
                                 )}
                             </div>
                             <div className="stat-input-group">
-                                <label>Height (cm)</label>
+                                <label>Height (cm) *</label>
                                 {isEditing ? (
                                     <input
                                         type="number"

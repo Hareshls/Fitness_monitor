@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import API from '../api';
 import { User, Mail, Calendar, Target, Save, X, Edit2, Info } from 'lucide-react';
@@ -8,6 +8,7 @@ import './Profile.css';
 const Profile = () => {
     const { user, updateUser } = useContext(AuthContext);
     const location = useLocation();
+    const navigate = useNavigate();
     const isNewUser = location.state?.isNewUser;
     
     const [isEditing, setIsEditing] = useState(isNewUser || false);
@@ -36,6 +37,9 @@ const Profile = () => {
             const res = await API.put('/auth/profile', formData);
             updateUser(res.data);
             setIsEditing(false);
+            if (isNewUser) {
+                navigate('/');
+            }
         } catch (err) {
             console.error('Failed to update profile', err);
             alert(err.response?.data?.message || 'Failed to update profile');

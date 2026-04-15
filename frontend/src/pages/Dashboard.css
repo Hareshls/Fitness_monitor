@@ -362,45 +362,26 @@
     }
 
     .stat-card {
-        padding: 0.75rem;
-        flex-direction: row;
-        align-items: center;
-        gap: 0.5rem;
-        text-align: left;
-    }
-
-    .stat-icon {
-        width: 32px;
-        height: 32px;
-        flex-shrink: 0;
-    }
-
-    .stat-icon svg {
-        width: 16px;
-        height: 16px;
-    }
-
-    .stat-info h3 {
-        font-size: 1.1rem;
-        margin-bottom: 0;
-    }
-
-    .stat-info p {
-        font-size: 0.65rem;
-    }
-
-    .stat-card {
         padding: 1rem;
         flex-direction: column;
         text-align: center;
         gap: 0.75rem;
     }
 
+    .stat-icon {
+        width: 40px;
         height: 40px;
+        flex-shrink: 0;
+    }
+
+    .stat-icon svg {
+        width: 20px;
+        height: 20px;
     }
 
     .stat-info h3 {
         font-size: 1.25rem;
+        margin-bottom: 0;
     }
 
     .stat-info p {
